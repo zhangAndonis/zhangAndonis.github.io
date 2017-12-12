@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="var sina={$:function(objName){if(document.getElementById){return eval(&apos;document.getElementById(&quot;&apos;+objName+&apos;&quot;)&apos;)}else{return eval(&">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2017/12/12/Project/js/ScrollPicLeft/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="var sina={$:function(objName){if(document.getElementById){return eval(&apos;document.getElementById(&quot;&apos;+objName+&apos;&quot;)&apos;)}else{return eval(&apos;document.all.&apos;+objName)}},isIE:navigator.appVersion.indexOf(&quot;MSIE&quot;)!=-">
+<meta property="og:updated_time" content="2017-10-26T07:21:42.910Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="var sina={$:function(objName){if(document.getElementById){return eval(&apos;document.getElementById(&quot;&apos;+objName+&apos;&quot;)&apos;)}else{return eval(&apos;document.all.&apos;+objName)}},isIE:navigator.appVersion.indexOf(&quot;MSIE&quot;)!=-">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Project/js/ScrollPicLeft" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/12/Project/js/ScrollPicLeft/" class="article-date">
+  <time datetime="2017-12-12T13:42:27.112Z" itemprop="datePublished">2017-12-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        var sina={$:function(objName){if(document.getElementById){return eval('document.getElementById("'+objName+'")')}else{return eval('document.all.'+objName)}},isIE:navigator.appVersion.indexOf("MSIE")!=-1?true:false,addEvent:function(l,i,I){if(l.attachEvent){l.attachEvent("on"+i,I)}else{l.addEventListener(i,I,false)}},delEvent:function(l,i,I){if(l.detachEvent){l.detachEvent("on"+i,I)}else{l.removeEventListener(i,I,false)}},readCookie:function(O){var o="",l=O+"=";if(document.cookie.length>0){var i=document.cookie.indexOf(l);if(i!=-1){i+=l.length;var I=document.cookie.indexOf(";",i);if(I==-1)I=document.cookie.length;o=unescape(document.cookie.substring(i,I))}};return o},writeCookie:function(i,l,o,c){var O="",I="";if(o!=null){O=new Date((new Date).getTime()+o*3600000);O="; expires="+O.toGMTString()};if(c!=null){I=";domain="+c};document.cookie=i+"="+escape(l)+O+I},readStyle:function(I,l){if(I.style[l]){return I.style[l]}else if(I.currentStyle){return I.currentStyle[l]}else if(document.defaultView&&document.defaultView.getComputedStyle){var i=document.defaultView.getComputedStyle(I,null);return i.getPropertyValue(l)}else{return null}}};
+//滚动图片构造函数
+//UI&UE Dept. mengjia
+//080623
+function ScrollPicleft(scrollContId,arrLeftId,arrRightId,dotListId){
+	this.scrollContId=scrollContId;
+	this.arrLeftId=arrLeftId;
+	this.arrRightId=arrRightId;
+	this.dotListId=dotListId;
+	this.dotClassName="dotItem";
+	this.dotOnClassName="dotItemOn";
+	this.dotObjArr=[];
+	this.pageWidth=0;
+	this.frameWidth=0;
+	this.frameHeight=0;
+	this.speed=10;
+	this.space=10;
+	this.pageIndex=0;
+	this.autoPlay=true;
+	this.autoPlayTime=5;
+	var _autoTimeObj,_scrollTimeObj,_state="ready";
+	this.stripDiv=document.createElement("DIV");
+	this.listDiv01=document.createElement("DIV");
+	this.listDiv02=document.createElement("DIV");
+	if(!ScrollPicleft.childs){ScrollPicleft.childs=[]};
+	this.ID=ScrollPicleft.childs.length;
+	ScrollPicleft.childs.push(this);
+	this.initialize=function(){
+		if(!this.scrollContId){
+			throw new Error("必须指定scrollContId.");
+			return
+		};
+		this.scrollContDiv=sina.$(this.scrollContId);if(!this.scrollContDiv){throw new Error("scrollContId不是正确的对象.(scrollContId = \""+this.scrollContId+"\")");return};this.scrollContDiv.style.width=this.frameWidth+"px";this.scrollContDiv.style.overflow="hidden";this.listDiv01.innerHTML=this.listDiv02.innerHTML=this.scrollContDiv.innerHTML;this.scrollContDiv.innerHTML="";this.scrollContDiv.appendChild(this.stripDiv);this.stripDiv.appendChild(this.listDiv01);this.stripDiv.appendChild(this.listDiv02);this.stripDiv.style.overflow="hidden";this.stripDiv.style.zoom="1";this.stripDiv.style.width="32766px";var isIE=navigator.userAgent.toUpperCase().indexOf("MSIE")==-1?false:true;if(isIE){this.listDiv01.style.styleFloat="left"; this.listDiv02.style.styleFloat="left";}else{this.listDiv01.style.cssFloat="left"; this.listDiv02.style.cssFloat="left";}sina.addEvent(this.scrollContDiv,"mouseover",Function("ScrollPicleft.childs["+this.ID+"].stop()"));sina.addEvent(this.scrollContDiv,"mouseout",Function("ScrollPicleft.childs["+this.ID+"].play()"));if(this.arrLeftId){this.arrLeftObj=sina.$(this.arrLeftId);if(this.arrLeftObj){sina.addEvent(this.arrLeftObj,"mousedown",Function("ScrollPicleft.childs["+this.ID+"].rightMouseDown()"));sina.addEvent(this.arrLeftObj,"mouseup",Function("ScrollPicleft.childs["+this.ID+"].rightEnd()"));sina.addEvent(this.arrLeftObj,"mouseout",Function("ScrollPicleft.childs["+this.ID+"].rightEnd()"))}};if(this.arrRightId){this.arrRightObj=sina.$(this.arrRightId);if(this.arrRightObj){sina.addEvent(this.arrRightObj,"mousedown",Function("ScrollPicleft.childs["+this.ID+"].leftMouseDown()"));sina.addEvent(this.arrRightObj,"mouseup",Function("ScrollPicleft.childs["+this.ID+"].leftEnd()"));sina.addEvent(this.arrRightObj,"mouseout",Function("ScrollPicleft.childs["+this.ID+"].leftEnd()"))}};if(this.dotListId){this.dotListObj=sina.$(this.dotListId);if(this.dotListObj){var pages=Math.round(this.listDiv01.offsetWidth/this.frameWidth+0.4),i,tempObj;for(i=0;i<pages;i++){tempobj=document.createelement("span");this.dotlistobj.appendchild(tempobj);this.dotobjarr.push(tempobj);if(i==this.pageindex){tempobj.classname=this.dotclassname}else{tempobj.classname=this.dotonclassname};tempobj.title="第"+(i+1)+"页";sina.addevent(tempobj,"click",function("scrollpicleft.childs["+this.id+"].pageto("+i+")"))}}};if(this.autoplay){this.play()}};this.leftmousedown=function(){if(_state!="ready"){return};_state="floating";_scrolltimeobj=setinterval("scrollpicleft.childs["+this.id+"].moveleft()",this.speed)};this.rightmousedown=function(){if(_state!="ready"){return};_state="floating";_scrolltimeobj=setinterval("scrollpicleft.childs["+this.id+"].moveright()",this.speed)};this.moveleft=function(){if(this.scrollcontdiv.scrollleft+this.space>=this.listDiv01.scrollWidth){this.scrollContDiv.scrollLeft=this.scrollContDiv.scrollLeft+this.space-this.listDiv01.scrollWidth}else{this.scrollContDiv.scrollLeft+=this.space};this.accountPageIndex()};this.moveRight=function(){if(this.scrollContDiv.scrollLeft-this.space<=0){this.scrollcontdiv.scrollleft=this.listdiv01.scrollwidth+this.scrollcontdiv.scrollleft-this.space}else{this.scrollcontdiv.scrollleft-=this.space};this.accountpageindex()};this.leftend=function(){if(_state!="floating"){return};_state="stoping";clearinterval(_scrolltimeobj);var fill="this.pageWidth-this.scrollContDiv.scrollLeft%this.pageWidth;this.move(fill)};this.rightEnd=function(){if(_state!="floating"){return};_state="stoping";clearInterval(_scrollTimeObj);var" thismove="num/5;if(!quick){if(thisMove">this.space){thisMove=this.space};if(thisMove<-this.space){thismove=-this.space}};if(math.abs(thismove)<1&&thismove!=0){thismove=thismove>=0?1:-1}else{thisMove=Math.round(thisMove)};var temp=this.scrollContDiv.scrollLeft+thisMove;if(thisMove>0){if(this.scrollContDiv.scrollLeft+thisMove>=this.listDiv01.scrollWidth){this.scrollContDiv.scrollLeft=this.scrollContDiv.scrollLeft+thisMove-this.listDiv01.scrollWidth}else{this.scrollContDiv.scrollLeft+=thisMove}}else{if(this.scrollContDiv.scrollLeft-thisMove<=0){this.scrollcontdiv.scrollleft=this.listdiv01.scrollwidth+this.scrollcontdiv.scrollleft-thismove}else{this.scrollcontdiv.scrollleft+=thismove}};num-=thismove;if(math.abs(num)==0){_state="ready";if(this.autoplay){this.play()};this.accountpageindex();return}else{this.accountpageindex();settimeout("scrollpicleft.childs["+this.id+"].move("+num+","+quick+")",this.speed)}};this.next=function(){if(_state!="ready"){return};_state="stoping";this.move(this.pagewidth,true)};this.play=function(){if(!this.autoplay){return};clearinterval(_autotimeobj);_autotimeobj=setinterval("scrollpicleft.childs["+this.id+"].next()",this.autoplaytime*1000)};this.stop=function(){clearinterval(_autotimeobj)};this.pageto=function(num){if(_state!="ready"){return};_state="stoping";var fill="num*this.frameWidth-this.scrollContDiv.scrollLeft;this.move(fill,true)};this.accountPageIndex=function(){this.pageIndex=Math.round(this.scrollContDiv.scrollLeft/this.frameWidth);if(this.pageIndex">Math.round(this.listDiv01.offsetWidth/this.frameWidth+0.4)-1){this.pageIndex=0};var i;for(i=0;i</=0){this.scrollcontdiv.scrollleft=this.listdiv01.scrollwidth+this.scrollcontdiv.scrollleft-thismove}else{this.scrollcontdiv.scrollleft+=thismove}};num-=thismove;if(math.abs(num)==0){_state="ready";if(this.autoplay){this.play()};this.accountpageindex();return}else{this.accountpageindex();settimeout("scrollpicleft.childs["+this.id+"].move("+num+","+quick+")",this.speed)}};this.next=function(){if(_state!="ready"){return};_state="stoping";this.move(this.pagewidth,true)};this.play=function(){if(!this.autoplay){return};clearinterval(_autotimeobj);_autotimeobj=setinterval("scrollpicleft.childs["+this.id+"].next()",this.autoplaytime*1000)};this.stop=function(){clearinterval(_autotimeobj)};this.pageto=function(num){if(_state!="ready"){return};_state="stoping";var></-this.space){thismove=-this.space}};if(math.abs(thismove)<1&&thismove!=0){thismove=thismove></=0){this.scrollcontdiv.scrollleft=this.listdiv01.scrollwidth+this.scrollcontdiv.scrollleft-this.space}else{this.scrollcontdiv.scrollleft-=this.space};this.accountpageindex()};this.leftend=function(){if(_state!="floating"){return};_state="stoping";clearinterval(_scrolltimeobj);var></pages;i++){tempobj=document.createelement("span");this.dotlistobj.appendchild(tempobj);this.dotobjarr.push(tempobj);if(i==this.pageindex){tempobj.classname=this.dotclassname}else{tempobj.classname=this.dotonclassname};tempobj.title="第"+(i+1)+"页";sina.addevent(tempobj,"click",function("scrollpicleft.childs["+this.id+"].pageto("+i+")"))}}};if(this.autoplay){this.play()}};this.leftmousedown=function(){if(_state!="ready"){return};_state="floating";_scrolltimeobj=setinterval("scrollpicleft.childs["+this.id+"].moveleft()",this.speed)};this.rightmousedown=function(){if(_state!="ready"){return};_state="floating";_scrolltimeobj=setinterval("scrollpicleft.childs["+this.id+"].moveright()",this.speed)};this.moveleft=function(){if(this.scrollcontdiv.scrollleft+this.space>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/12/Project/js/ScrollPicLeft/" data-id="cjb3ohxwx000n58pw9tac84tx" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/12/Project/js/xqw/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/12/Project/js/require/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/12/Project/Project/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/12/Project/js/xqw/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/12/Project/js/ScrollPicLeft/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/12/Project/js/require/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/12/Project/js/requestAnimationFrame/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
