@@ -7,16 +7,16 @@
   
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="/*--------------SLIDER----------------*/  #slider { 	width: 773px; 	float: left; }   /*--------------CONTROLS--------------*/  /*position controls*/ .controls l">
+  <meta name="description" content="Document                                 function foo(){         getName = function(){console.log(1)}         return this     }     foo.getName = function(){con">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/2017/12/12/Project/css/style/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/12/13/amazing_foo_question/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="/*--------------SLIDER----------------*/  #slider { 	width: 773px; 	float: left; }   /*--------------CONTROLS--------------*/  /*position controls*/ .controls li { 	top: 50%; 	margin-top: 100px; 	 }">
-<meta property="og:updated_time" content="2017-10-25T11:33:19.695Z">
+<meta property="og:description" content="Document                                 function foo(){         getName = function(){console.log(1)}         return this     }     foo.getName = function(){console.log(2)}     f">
+<meta property="og:updated_time" content="2017-12-13T06:23:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="/*--------------SLIDER----------------*/  #slider { 	width: 773px; 	float: left; }   /*--------------CONTROLS--------------*/  /*position controls*/ .controls li { 	top: 50%; 	margin-top: 100px; 	 }">
+<meta name="twitter:description" content="Document                                 function foo(){         getName = function(){console.log(1)}         return this     }     foo.getName = function(){console.log(2)}     f">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -63,10 +63,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Project/css/style" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-amazing_foo_question" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/12/12/Project/css/style/" class="article-date">
-  <time datetime="2017-12-12T13:42:20.266Z" itemprop="datePublished">2017-12-12</time>
+    <a href="/2017/12/13/amazing_foo_question/" class="article-date">
+  <time datetime="2017-12-13T10:27:20.945Z" itemprop="datePublished">2017-12-13</time>
 </a>
     
   </div>
@@ -75,65 +75,62 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
         
-/*--------------SLIDER----------------*/
-
-#slider {
-	width: 773px;
-	float: left;
-}
-
-
-/*--------------CONTROLS--------------*/
-
-/*position controls*/
-.controls li {
-	top: 50%;
-	margin-top: 100px;
-	
-}
-
-.controls li:nth-child(1) {
-	left: 330px;
-}
-
-.controls li:nth-child(2) {
-	right: 330px;
-}
+    
+    function foo(){
+        getName = function(){console.log(1)}
+        return this
+    }
+    foo.getName = function(){console.log(2)}
+    foo.prototype.getName = function(){console.log(3)}
+    var getName = function(){console.log(4)}
+    function getName(){console.log(5)}
 
 
-/*------------PAGINATION------------*/
+    foo.getName()//2
+    //foo是一个函数，也可以说是一个对象，所以它也可以挂载一些属性和方法，18行在其上挂载了一个getName方法
+    //执行的结果是
+    
+    getName()//4
+    //21行有一个全局函数，全局函数声明提前后被20行的getName覆盖，所以输出4
 
-/*style pagination*/
-.pagination li {
-	background-color: #ddd;
-}
+    foo().getName()//1
+    //foo()执行完成后，将全局的getName也就是window.getName给更改后返回this，而在这里this执行的就是window，所以最后执行的就是window.getName，所以输出1
 
-.pagination li.active {
-	background-color: #000;
-}
+    getName()//1
+    //在上面已经更改全局的getName，所以依然是1
 
+    new foo.getName()//2
+    //new 操作符在实例化构造器的时候，会执行构造器函数，也就是说，foo.getName会执行，输出2
 
-/*-------------HELPERS----------------*/
+    new foo().getName()//3
+    //new操作符的优先级较高，所以会先new foo()得到一个实例，然后再执行实例的getName方法,这个时候，实例的构造器里没有getName方法，就会执行构造器原型上的getName方法
 
-.responsive {
-	width: 100%;
-	height: auto;
-}
+    new new foo().getName()//3
+    //先执行new foo()得到一个实例，然后在new 这个实例的getName方法,这个时候会执行这个方法，所以输出3
 
-.clearfix:after {
-	content: "";
-	display: table;
-	clear: both;
-}
+    //除了本地对象的方法，其他的函数都能new
 
-img {
-	display: block;
-}
+    </script>
+</body>
+</html>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/12/Project/css/style/" data-id="cjb4wxvlm000diwpwro0oymmr" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2017/12/13/amazing_foo_question/" data-id="cjb4wxo090000iwpwox3obov8" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -142,17 +139,8 @@ img {
     
 <nav id="article-nav">
   
-    <a href="/2017/12/12/Project/css/style1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Neuer</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/12/12/Project/css/shop/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/12/12/Project/Project/README/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title"></div>
     </a>
